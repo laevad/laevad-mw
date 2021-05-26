@@ -25,90 +25,97 @@ class _ViewScreenState extends State<ViewScreen> {
     super.didChangeDependencies();
   }
 
+  Future<void> _refreshProduct(BuildContext context) async {
+    await Provider.of<Products>(context, listen: false).fetchProduct();
+  }
+
   condition(context) {
     final productsData = Provider.of<Products>(context, listen: true);
     final product = productsData.items;
     Widget content = Center(child: Text("No Product Added"));
 
     content = Container(
-      child: Container(
-        child: ListView.builder(
-          itemCount: product.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              elevation: 5,
-              margin: EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 5,
-              ),
-              child: ListTile(
-                tileColor: HexColor('9fe6a0'),
-                title: Wrap(spacing: 15, children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Name',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+      child: RefreshIndicator(
+        onRefresh: () => _refreshProduct(context),
+        child: Container(
+          child: ListView.builder(
+            itemCount: product.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                elevation: 5,
+                margin: EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 5,
+                ),
+                child: ListTile(
+                  tileColor: HexColor('9fe6a0'),
+                  title: Wrap(spacing: 15, children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '${product[product.length - 1 - index].name}',
-                        style: TextStyle(
-                          fontSize: 16,
+                        Text(
+                          '${product[product.length - 1 - index].name}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ]),
-                trailing: Container(
-                  child: Wrap(
-                    spacing: 50,
-                    children: [
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Price',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            FittedBox(
-                              child: Text(
-                                '${product[product.length - 1 - index].price}',
+                      ],
+                    ),
+                  ]),
+                  trailing: Container(
+                    child: Wrap(
+                      spacing: 50,
+                      children: [
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Price',
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                          ]),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Quantity',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                              FittedBox(
+                                child: Text(
+                                  '${product[product.length - 1 - index].price}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
-                            ),
-                            FittedBox(
-                              child: Text(
-                                '${product[product.length - 1 - index].quantity}',
-                                style: TextStyle(fontSize: 16),
+                            ]),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Quantity',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ])
-                    ],
+                              FittedBox(
+                                child: Text(
+                                  '${product[product.length - 1 - index].quantity}',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ])
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
