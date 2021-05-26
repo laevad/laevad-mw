@@ -72,7 +72,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> updateProduct(String id, Product newProduct, context) async {
+  Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) {
       return prod.id == id;
     });
@@ -90,7 +90,7 @@ class Products with ChangeNotifier {
         }),
       );
       _items[prodIndex] = newProduct;
-      Navigator.of(context).pushReplacementNamed(ViewScreen.route);
+
       notifyListeners();
     } else {
       print('prodId not found');

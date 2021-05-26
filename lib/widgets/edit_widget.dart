@@ -27,7 +27,7 @@ class _EditWidgetState extends State<EditWidget> {
             Provider.of<Products>(context, listen: false).findById(productId);
         _initValue = {
           'name': _editedProduct.name,
-          'price': _editedProduct.price.toString(),
+          'price': _editedProduct.price.toStringAsFixed(2),
           'quantity': _editedProduct.quantity.toString(),
         };
       }
@@ -53,7 +53,7 @@ class _EditWidgetState extends State<EditWidget> {
         quantity: _editedProduct.quantity,
       );
       await Provider.of<Products>(context, listen: false)
-          .updateProduct(_editedProduct.id, _editedProduct, context);
+          .updateProduct(_editedProduct.id, _editedProduct);
     } else {
       try {
         await Provider.of<Products>(context, listen: false)
@@ -78,6 +78,7 @@ class _EditWidgetState extends State<EditWidget> {
     setState(() {
       _isLoading = false;
     });
+    Navigator.of(context).pop();
   }
 
   @override
