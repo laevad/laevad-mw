@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'view_screen.dart';
 import '../widgets/update_widdget.dart';
 import 'package:provider/provider.dart';
 import '../provider/products.dart';
+import 'add_screen.dart';
 
 class UpdateScreen extends StatefulWidget {
   static const route = '/update-screen';
@@ -11,6 +13,10 @@ class UpdateScreen extends StatefulWidget {
 }
 
 class _UpdateScreenState extends State<UpdateScreen> {
+  Future<void> _refreshProduct(BuildContext context) async {
+    await Provider.of<Products>(context, listen: false).fetchProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,14 +27,18 @@ class _UpdateScreenState extends State<UpdateScreen> {
               Icons.control_point,
               size: 30.0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(AddScreen.route);
+            },
           ),
           IconButton(
             icon: Icon(
               Icons.remove_red_eye,
               size: 31,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(ViewScreen.route);
+            },
           ),
         ],
         title: Text('Update Product'),
@@ -46,7 +56,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                 child: Text("An Error occured!!"),
               );
             } else {
-              return UpdateWidget();
+              return RefreshIndicator(
+                  onRefresh: () => _refreshProduct(context),
+                  child: UpdateWidget());
             }
           }
         },

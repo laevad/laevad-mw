@@ -9,6 +9,7 @@ class UpdateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Products>(
       builder: (ctx, productData, child) => ListView.builder(
+        padding: EdgeInsets.all(8.0),
         reverse: true,
         shrinkWrap: true,
         itemBuilder: (ctx, index) {

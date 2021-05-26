@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import '../provider/products.dart';
+import 'add_screen.dart';
+import 'update_screen.dart';
 
 class ViewScreen extends StatefulWidget {
   static const route = '/view';
@@ -39,6 +41,7 @@ class _ViewScreenState extends State<ViewScreen> {
         onRefresh: () => _refreshProduct(context),
         child: Container(
           child: ListView.builder(
+            padding: EdgeInsets.all(8.0),
             reverse: true,
             shrinkWrap: true,
             itemCount: product.length,
@@ -135,14 +138,18 @@ class _ViewScreenState extends State<ViewScreen> {
               Icons.control_point,
               size: 30.0,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(AddScreen.route);
+            },
           ),
           IconButton(
             icon: Icon(
               Icons.edit,
               size: 31,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(UpdateScreen.route);
+            },
           ),
         ],
         title: Text('View Product'),
