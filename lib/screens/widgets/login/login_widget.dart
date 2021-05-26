@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import '/provider/auth.dart';
+import 'package:provider/provider.dart';
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -19,6 +21,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var authData = Provider.of<Auth>(context, listen: false);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +72,9 @@ class _LoginWidgetState extends State<LoginWidget> {
               ),
               SizedBox(height: 20),
               TextField(
+                onSubmitted: (value) => authData.login(
+                    usernameController.text, passwordController.text),
+                obscureText: true,
                 controller: passwordController,
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
@@ -98,7 +104,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     shadowColor: MaterialStateProperty.all(
                         Colors.grey), //Defines shadowColor
                   ),
-                  onPressed: () => null,
+                  onPressed: () => authData.login(
+                      usernameController.text, passwordController.text),
                   child: Container(
                     padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                     child: Text(
