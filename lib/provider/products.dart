@@ -71,4 +71,29 @@ class Products with ChangeNotifier {
       throw e;
     }
   }
+
+  Future<void> updateProduct(String id, Product newProduct, context) async {
+    final prodIndex = _items.indexWhere((prod) {
+      return prod.id == id;
+    });
+
+    if (prodIndex >= 0) {
+      await http.patch(
+        Uri.parse('http://192.168.10.3/api/products/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'name': newProduct.name,
+          'price': newProduct.price,
+          'quantity': newProduct.quantity
+        }),
+      );
+      _items[prodIndex] = newProduct;
+      Navigator.of(context).pushReplacementNamed(ViewScreen.route);
+      notifyListeners();
+    } else {
+      print('prodId not found');
+    }
+  }
 }

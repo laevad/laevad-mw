@@ -60,7 +60,8 @@ class UpdateWidget extends StatelessWidget {
                       color: Theme.of(context).primaryColorDark,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(EditScreen.route,
+                      Navigator.of(context).pushReplacementNamed(
+                          EditScreen.route,
                           arguments: productData.items[index].id);
                     },
                   ),

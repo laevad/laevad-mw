@@ -8,22 +8,6 @@ class EditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.remove_red_eye,
-              size: 30.0,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.edit,
-              size: 31,
-            ),
-            onPressed: () {},
-          ),
-        ],
         title: Text('Edit Product'),
       ),
       body: EditWidget(),
