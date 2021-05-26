@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-              brightness: Brightness.light,
               // 29bb89 , 4aa96c , 289672, 9fe6a0
               primaryColor: HexColor('29bb89'),
               accentColor: Colors.greenAccent,
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
                 bodyText2: TextStyle(fontSize: 20.0),
               ),
             ),
-            home: authData.granted ? HomepageScreen() : LoginScreen(),
+            home: authData.loginGranted ? HomepageScreen() : LoginScreen(),
           );
         },
       ),
