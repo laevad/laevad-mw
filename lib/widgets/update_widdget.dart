@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import '../screens/edit_screen.dart';
 import '../provider/products.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,8 @@ class UpdateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Products>(
       builder: (ctx, productData, child) => ListView.builder(
+        reverse: true,
+        shrinkWrap: true,
         itemBuilder: (ctx, index) {
           return Card(
             elevation: 5,
@@ -22,7 +25,7 @@ class UpdateWidget extends StatelessWidget {
                       padding: EdgeInsets.all(6),
                       child: FittedBox(
                         child: Text(
-                          "₱${productData.items[productData.items.length - 1 - index].price}",
+                          "₱${productData.items[index].price}",
                           style: TextStyle(
                               color: Colors.grey[50],
                               fontWeight: FontWeight.bold),
@@ -40,7 +43,7 @@ class UpdateWidget extends StatelessWidget {
                   children: [
                     FittedBox(
                       child: Text(
-                        '${productData.items[productData.items.length - 1 - index].name}',
+                        '${productData.items[index].name}',
                         style: TextStyle(fontSize: 24),
                       ),
                     ),
@@ -56,7 +59,10 @@ class UpdateWidget extends StatelessWidget {
                       size: 28,
                       color: Theme.of(context).primaryColorDark,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(EditScreen.route,
+                          arguments: productData.items[index].id);
+                    },
                   ),
                   IconButton(
                     icon: Icon(

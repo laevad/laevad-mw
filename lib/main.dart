@@ -8,6 +8,7 @@ import 'screens/homepage_screen.dart';
 import 'screens/view_screen.dart';
 import 'screens/add_screen.dart';
 import 'screens/update_screen.dart';
+import 'screens/edit_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
               ViewScreen.route: (_) => ViewScreen(),
               AddScreen.route: (_) => AddScreen(),
               UpdateScreen.route: (_) => UpdateScreen(),
+              EditScreen.route: (_) => EditScreen(),
             },
             title: 'Flutter Demo',
             theme: ThemeData(

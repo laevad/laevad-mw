@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:laevad_flutter_project/models/product.dart';
 import '../provider/products.dart';
 import 'package:provider/provider.dart';
+import '../models/product.dart';
 
-class AddWidget extends StatefulWidget {
+class EditWidget extends StatefulWidget {
   @override
-  _AddWidgetState createState() => _AddWidgetState();
+  _EditWidgetState createState() => _EditWidgetState();
 }
 
-class _AddWidgetState extends State<AddWidget> {
-  final nameController = TextEditingController();
-  final priceController = TextEditingController();
-  final quantityController = TextEditingController();
+class _EditWidgetState extends State<EditWidget> {
+  var _editedProduct = Product(name: '', price: 0, quantity: 0);
+  var _initValue = {'name': '', 'price': '', 'quantity': ''};
+  var _isInit = true;
+  var _isLoading = false;
 
   @override
-  void dispose() {
-    nameController.dispose();
-    priceController.dispose();
-    quantityController.dispose();
-    super.dispose();
+  void didChangeDependencies() {
+    if (_isInit) {
+      final productId = ModalRoute.of(context)!.settings.arguments as String;
+      print(productId);
+      if (productId.isNotEmpty) {
+        _editedProduct =
+            Provider.of<Products>(context, listen: false).findById(productId);
+        _initValue = {};
+      }
+    }
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<Products>(context, listen: false);
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 30),
@@ -33,8 +39,7 @@ class _AddWidgetState extends State<AddWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextField(
-                controller: nameController,
+              TextFormField(
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -53,8 +58,7 @@ class _AddWidgetState extends State<AddWidget> {
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: priceController,
+              TextFormField(
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -73,8 +77,7 @@ class _AddWidgetState extends State<AddWidget> {
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                controller: quantityController,
+              TextFormField(
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -94,21 +97,13 @@ class _AddWidgetState extends State<AddWidget> {
               ),
               SizedBox(height: 20),
               TextButton(
-                onPressed: () {
-                  productsData.addProduct(
-                      Product(
-                        name: nameController.text,
-                        price: double.parse(priceController.text),
-                        quantity: int.parse(quantityController.text),
-                      ),
-                      context);
-                },
+                onPressed: () {},
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(0, 14, 0, 14),
                   margin: EdgeInsets.symmetric(horizontal: 12),
                   child: Text(
-                    'Add Product',
+                    'Edit Product',
                     style: TextStyle(fontSize: 20, color: Colors.black87),
                     textAlign: TextAlign.center,
                   ),

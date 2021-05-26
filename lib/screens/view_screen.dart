@@ -39,6 +39,8 @@ class _ViewScreenState extends State<ViewScreen> {
         onRefresh: () => _refreshProduct(context),
         child: Container(
           child: ListView.builder(
+            reverse: true,
+            shrinkWrap: true,
             itemCount: product.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
@@ -61,7 +63,7 @@ class _ViewScreenState extends State<ViewScreen> {
                           ),
                         ),
                         Text(
-                          '${product[product.length - 1 - index].name}',
+                          '${product[index].name}',
                           style: TextStyle(
                             fontSize: 16,
                           ),
@@ -85,7 +87,7 @@ class _ViewScreenState extends State<ViewScreen> {
                               ),
                               FittedBox(
                                 child: Text(
-                                  '₱${product[product.length - 1 - index].price.toStringAsFixed(2)}',
+                                  '₱${product[index].price.toStringAsFixed(2)}',
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -104,7 +106,7 @@ class _ViewScreenState extends State<ViewScreen> {
                               ),
                               FittedBox(
                                 child: Text(
-                                  '${product[product.length - 1 - index].quantity}',
+                                  '${product[index].quantity}',
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
