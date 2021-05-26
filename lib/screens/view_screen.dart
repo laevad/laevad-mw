@@ -150,6 +150,7 @@ class _ViewScreenState extends State<ViewScreen> {
               child: CircularProgressIndicator(),
             )
           : FutureBuilder(
+              //quest? there's another method to implement here but already here xD
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 return Builder(builder: (BuildContext buildContext) {
                   return condition(context);
