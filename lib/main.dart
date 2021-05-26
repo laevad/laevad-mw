@@ -6,6 +6,7 @@ import 'provider/products.dart';
 import 'screens/login_screen.dart';
 import 'screens/homepage_screen.dart';
 import 'screens/view_screen.dart';
+import 'screens/add_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             routes: {
               ViewScreen.route: (_) => ViewScreen(),
+              AddScreen.route: (_) => AddScreen(),
             },
             title: 'Flutter Demo',
             theme: ThemeData(
