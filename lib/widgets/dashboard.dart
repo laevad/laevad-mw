@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import '../screens/add_screen.dart';
 import '../screens/view_screen.dart';
 
 class DashBoard extends StatelessWidget {
@@ -45,7 +46,9 @@ class DashBoard extends StatelessWidget {
             width: double.infinity,
             height: 60,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(AddScreen.route);
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
                   HexColor('29bb89'),
