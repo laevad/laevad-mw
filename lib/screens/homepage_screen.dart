@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/main-menu/dashboard.dart';
+import '../widgets/dashboard.dart';
 
 class HomepageScreen extends StatelessWidget {
   @override
