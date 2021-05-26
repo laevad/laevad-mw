@@ -91,7 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.green),
                     ),
-                    hintText: "admin123",
+                    hintText: "admin",
                     labelText: 'Password',
                     labelStyle: TextStyle(color: Color(0xFFB3B1B1)),
                     hintStyle:
