@@ -71,7 +71,19 @@ class UpdateWidget extends StatelessWidget {
                       size: 28,
                       color: Theme.of(context).errorColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await Provider.of<Products>(context, listen: false)
+                            .deleteProduct(productData.items[index].id);
+                      } catch (error) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            "Deleting failed!",
+                            textAlign: TextAlign.center,
+                          ),
+                        ));
+                      }
+                    },
                   ),
                 ],
               ),
