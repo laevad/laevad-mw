@@ -85,7 +85,7 @@ class _ViewScreenState extends State<ViewScreen> {
                               ),
                               FittedBox(
                                 child: Text(
-                                  '${product[product.length - 1 - index].price}',
+                                  '₱${product[product.length - 1 - index].price.toStringAsFixed(2)}',
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),

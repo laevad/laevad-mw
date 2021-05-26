@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/product.dart';
+import '../screens/view_screen.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [];
@@ -11,7 +12,6 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
-  // ignore: unused_element
   Future<void> fetchProduct() async {
     try {
       Map<String, String> _headers = {
@@ -39,6 +39,30 @@ class Products with ChangeNotifier {
         _items = tempList;
         notifyListeners();
       }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> addProduct(Product product, BuildContext context) async {
+    try {
+      await http.post(Uri.parse('http://192.168.10.3/api/products'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, dynamic>{
+            'name': product.name,
+            'price': product.price,
+            'quantity': product.quantity
+          }));
+      final newProduct = Product(
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity,
+      );
+      _items.add(newProduct);
+      Navigator.of(context).pushReplacementNamed(ViewScreen.route);
+      notifyListeners();
     } catch (e) {
       throw e;
     }
