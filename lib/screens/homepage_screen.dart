@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import '../widgets/dashboard.dart';
+import '../provider/auth.dart';
+import 'package:provider/provider.dart';
 
 class HomepageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var authData = Provider.of<Auth>(context);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -13,7 +16,7 @@ class HomepageScreen extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              authData.logout();
             },
           ),
         ],

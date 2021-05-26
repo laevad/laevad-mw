@@ -10,12 +10,10 @@ class LoginScreen extends StatelessWidget {
       // resizeToAvoidBottomInset: false,
       body: Stack(
         children: <Widget>[
-          SingleChildScrollView(
-            child: Container(
-              height: deviceSize.height,
-              width: deviceSize.width,
-              child: LoginWidget(),
-            ),
+          Container(
+            height: deviceSize.height,
+            width: deviceSize.width,
+            child: LoginWidget(),
           ),
         ],
       ),

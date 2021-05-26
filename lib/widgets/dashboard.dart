@@ -1,81 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 120),
-      height: 250,
+      margin: EdgeInsets.symmetric(horizontal: 30),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: () {},
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  HexColor('29bb89'),
+                ), //Background Color
+                elevation: MaterialStateProperty.all(3), //Defines Elevation
+                shadowColor: MaterialStateProperty.all(
+                    Colors.grey), //Defines shadowColor
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+              ),
               child: Text(
                 'View Product',
                 style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.center,
               ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).primaryColor.withOpacity(0.7),
-                    Theme.of(context).primaryColor,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(15),
-              ),
             ),
           ),
-          TextButton(
-            onPressed: () {},
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          SizedBox(
+            height: 30,
+          ),
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  HexColor('29bb89'),
+                ), //Background Color
+                elevation: MaterialStateProperty.all(3), //Defines Elevation
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ), //Defines shadowColor
+              ),
               child: Text(
                 'Add Product',
                 style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.center,
               ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).primaryColor.withOpacity(0.7),
-                    Theme.of(context).primaryColor,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(15),
-              ),
             ),
           ),
-          TextButton(
-            onPressed: () {},
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+          SizedBox(height: 30),
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    HexColor('29bb89')), //Background Color
+                elevation: MaterialStateProperty.all(3), //Defines Elevation
+                shadowColor: MaterialStateProperty.all(Colors.grey),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ), //Defines shadowColor
+              ),
               child: Text(
                 'Update Product',
                 style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.center,
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).primaryColor.withOpacity(0.7),
-                    Theme.of(context).primaryColor,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(15),
               ),
             ),
           ),
