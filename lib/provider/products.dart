@@ -8,6 +8,7 @@ import '../screens/view_screen.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [];
+  String url = "https://mwinventory.000webhostapp.com/api/products";
 
   List<Product> get items {
     return [..._items];
@@ -24,9 +25,7 @@ class Products with ChangeNotifier {
         'Charset': 'utf-8'
       };
       final List<Product> tempList = [];
-      final response = await http.get(
-          Uri.parse('http://192.168.10.3/api/products'),
-          headers: _headers);
+      final response = await http.get(Uri.parse(url), headers: _headers);
       List<dynamic> values;
       values = await json.decode(response.body);
       if (values.length > 0) {
@@ -51,7 +50,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product product, BuildContext context) async {
     try {
-      await http.post(Uri.parse('http://192.168.10.3/api/products'),
+      await http.post(Uri.parse(url),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -78,7 +77,7 @@ class Products with ChangeNotifier {
 
     if (prodIndex >= 0) {
       await http.patch(
-        Uri.parse('http://192.168.10.3/api/products/$id'),
+        Uri.parse('$url/$id'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -97,17 +96,19 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
+    print(id.runtimeType);
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     Product? existingProduct = _items[existingProductIndex];
     _items.removeAt(existingProductIndex);
     _items.removeWhere((prod) => prod.id == id);
     notifyListeners();
     final response = await http.delete(
-      Uri.parse('http://192.168.10.3/api/products/$id'),
+      Uri.parse('$url/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
+    print(response.body);
     if (response.statusCode >= 400) {
       _items.insert(existingProductIndex, existingProduct);
       notifyListeners();

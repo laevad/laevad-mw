@@ -82,6 +82,7 @@ class UpdateWidget extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ));
+                        throw error;
                       }
                     },
                   ),
